@@ -3,48 +3,45 @@ name: Deploy SakanoQR Payment
 on:
   push:
     branches:
-      - main  # Trigger deployment on pushes to the main branch
-  pull_request:
-    branches:
       - main
-
-env:
-  AWS_REGION: us-east-1  # Set your AWS region
-  TF_WORKING_DIR: infra/terraform  # Adjust if your Terraform is in a different folder
 
 jobs:
   deploy:
-    name: Deploy Application
+    name: Deploy Infrastructure
     runs-on: ubuntu-latest
 
     permissions:
       contents: read
-      id-token: write  # Needed for OIDC authentication with AWS
+      id-token: write
 
     steps:
-      # Checkout the code
+      # Step 1: Checkout the code
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
 
-      # Set up Terraform
+      # Step 2: Debug repository structure
+      - name: Debug repository structure
+        run: ls -R
+
+      # Step 3: Set up Terraform
       - name: Set up Terraform
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.0
 
-      # Initialize Terraform
+      # Step 4: Initialize Terraform
       - name: Terraform Init
-        working-directory: ${{ env.TF_WORKING_DIR }}
+        working-directory: infra/terraform  # Update to the correct path
         run: terraform init
 
-      # Plan Terraform changes
+      # Step 5: Plan Terraform changes
       - name: Terraform Plan
-        working-directory: ${{ env.TF_WORKING_DIR }}
+        working-directory: infra/terraform  # Update to the correct path
         run: terraform plan
 
-      # Apply Terraform changes
+      # Step 6: Apply Terraform changes
       - name: Terraform Apply
-        working-directory: ${{ env.TF_WORKING_DIR }}
+        working-directory: infra/terraform  # Update to the correct path
         run: terraform apply -auto-approve
-
-     

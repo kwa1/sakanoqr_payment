@@ -18,8 +18,8 @@ First, clone the repository to your local machine:
 
 bash
 Copy code
-git clone https://github.com/your-username/sakano-payment-qr-code-generator.git
-cd sakano-payment-qr-code-generator
+git clone https://github.com/kwa1/sakanoqr_payment.git
+cd sakanoqr_payment code-generator
 Open the Project in Xcode
 Open the .xcodeproj or .xcworkspace file in Xcode.
 Ensure the project is set to your desired target (iOS or macOS).

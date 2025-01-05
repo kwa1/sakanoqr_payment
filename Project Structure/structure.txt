@@ -1,8 +1,0 @@
-/Shared
-  - QRCodeViewModel.swift
-  - QRResponse.swift
-  - QRCodeView.swift
-/iOS
-  - QRCodeApp.swift
-/macOS
-  - QRCodeMacApp.swift
